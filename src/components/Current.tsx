@@ -14,7 +14,7 @@ type CurrType = {
     bpi:{
         USD: {
             code: string,
-            rate: string,
+            rate: number,
             description: string,
             rate_float: number
 

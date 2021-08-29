@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom'
 import axios from 'axios';
 import { useEffect, useState } from 'react'
-import {useLocation} from "react-router-dom";
+import { useLocation } from "react-router-dom";
+
+
 
 type PType = {
     bpi: any
@@ -32,7 +34,7 @@ const HistoryResult = () => {
     const fetchApi = async () => {
         try {
             const resp =
-                await axios.get<PType>('https://api.coindesk.com/v1/bpi/historical/close.json?currency=THB&start='+ s + '&end=' +e)
+                await axios.get<PType>('https://api.coindesk.com/v1/bpi/historical/close.json?currency=THB&start=' + s + '&end=' + e)
             setPrice(resp.data)
             setLoading(false)
         }
@@ -48,10 +50,10 @@ const HistoryResult = () => {
     }, [])
 
     const pr = () => {
-        let a = [];
 
-        for (const [key, value] of Object.entries(price?.bpi)) {
-            a.push(key + ' - ' + value + ' THB');
+        let a = [];
+        for (const[key, value] of Object.entries(price?.bpi)) {
+            a.push(`${key} - ${Number(value).toLocaleString()} THB`);
         }
         const b = a.map(x => <ul className="nobull"><li> {x} </li></ul>)
         return b;
@@ -67,9 +69,9 @@ const HistoryResult = () => {
                 <div>
                     <p className='text-xl font-semibold'> ( From {s} To {e} )</p>
                     <p className='text-xl'>
-                     {pr()}   
+                        {pr()}
                     </p>
-                    
+
                 </div>
 
             )
